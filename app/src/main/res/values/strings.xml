@@ -3,4 +3,7 @@
 
     <string name="hello_world">Hello world!</string>
     <string name="action_settings">Settings</string>
+    <string name="title_activity_login_activity">Login</string>
+    <string name="title_activity_sign_up_activity">Sign Up</string>
+    <string name="title_activity_my_trip_list">MyTripList</string>
 </resources>
