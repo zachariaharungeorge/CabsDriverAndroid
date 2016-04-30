@@ -1,18 +1,20 @@
-package rdxcabs.com.cabsdriverandroid;
+package com.rdxcabs.UIActivity;
 
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.os.Bundle;
 import android.provider.Settings;
 import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 
-import rdxcabs.com.cabsdriverandroid.R;
+import com.rdxcabs.R;
+import com.rdxcabs.Utilities.GPSTracker;
+
 
 public class MainActivity extends AppCompatActivity {
 
@@ -22,7 +24,7 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         final GPSTracker gps = new GPSTracker(MainActivity.this);
-        if(!gps.canGetLocation){
+        if(!gps.canGetLocation()){
             AlertDialog.Builder alertDialog=new AlertDialog.Builder(MainActivity.this);
             alertDialog.setTitle("Location Services not Enabled");
             alertDialog.setMessage("GPS is not enabled. Do you want to go to Settings and Enable it");
@@ -43,12 +45,12 @@ public class MainActivity extends AppCompatActivity {
             alertDialog.show();
         }
 
-        SharedPreferences sp=getSharedPreferences("username",0);
+        SharedPreferences sp=getSharedPreferences("RDXDrivers",0);
         String username = sp.getString("username","");
 
 
         if(username!=""){
-            Intent intent = new Intent(this,TripList.class);
+            Intent intent = new Intent(this,TripListActivity.class);
             startActivity(intent);
         }
 
@@ -58,6 +60,8 @@ public class MainActivity extends AppCompatActivity {
         signIn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                startService(new Intent(MainActivity.this, LoginActivity
+                        .class));
                 Intent intent = new Intent(MainActivity.this, LoginActivity.class);
                 startActivity(intent);
             }

@@ -1,4 +1,4 @@
-package rdxcabs.com.cabsdriverandroid;
+package com.rdxcabs.UIActivity;
 
 import android.app.ProgressDialog;
 import android.content.Context;
@@ -14,12 +14,15 @@ import com.firebase.client.ChildEventListener;
 import com.firebase.client.DataSnapshot;
 import com.firebase.client.Firebase;
 import com.firebase.client.FirebaseError;
+import com.rdxcabs.Adapters.TripLayoutAdapter;
+import com.rdxcabs.Beans.TripsBean;
+import com.rdxcabs.R;
 
 import java.util.ArrayList;
 
 import static com.firebase.client.Firebase.setAndroidContext;
 
-public class TripList extends AppCompatActivity {
+public class TripListActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -44,7 +47,7 @@ public class TripList extends AppCompatActivity {
                                                         lst.add(tripsBean);
                                                     }
 
-                                                    TripLayoutAdapter tripLayoutAdapter = new TripLayoutAdapter(TripList.this, R.layout.activity_trip_layout, lst);
+                                                    TripLayoutAdapter tripLayoutAdapter = new TripLayoutAdapter(TripListActivity.this, R.layout.activity_trip_layout, lst);
                                                     ListView listView = (ListView) findViewById(R.id.listView);
                                                     listView.setAdapter(tripLayoutAdapter);
                                                     progressDialog.dismiss();
@@ -100,7 +103,7 @@ public class TripList extends AppCompatActivity {
             SharedPreferences.Editor editor= sp.edit();
             editor.putString("username",null);
             editor.commit();
-            Intent intent = new Intent(TripList.this, MainActivity.class);
+            Intent intent = new Intent(TripListActivity.this, MainActivity.class);
             startActivity(intent);
         }
 

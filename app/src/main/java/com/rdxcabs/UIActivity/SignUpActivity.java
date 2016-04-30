@@ -1,4 +1,4 @@
-package rdxcabs.com.cabsdriverandroid;
+package com.rdxcabs.UIActivity;
 
 import android.app.AlertDialog;
 import android.app.ProgressDialog;
@@ -9,6 +9,7 @@ import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.provider.Settings;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -17,11 +18,15 @@ import android.widget.TextView;
 
 import com.firebase.client.Firebase;
 import com.firebase.client.FirebaseError;
+import com.rdxcabs.Beans.DriverBean;
+import com.rdxcabs.Constants.Constants;
+import com.rdxcabs.R;
+import com.rdxcabs.Services.LocationService;
 
 import java.util.HashMap;
 import java.util.Map;
 
-import static com.firebase.client.Firebase.*;
+import static com.firebase.client.Firebase.CompletionListener;
 import static com.firebase.client.Firebase.setAndroidContext;
 
 public class SignUpActivity extends AppCompatActivity {
@@ -59,17 +64,13 @@ public class SignUpActivity extends AppCompatActivity {
                     });
                 }
 
-                Firebase myFirebaseRef = new Firebase("https://resplendent-fire-1005.firebaseio.com/Drivers");
+                Firebase myFirebaseRef = new Firebase(Constants.FIREBASE_URL + Constants.URL_SEP + Constants.DRIVER + Constants.URL_SEP + username.getText().toString());
 
-                final Map<String,String> user = new HashMap<String,String>();
-                user.put("fullName",fullName.getText().toString());
-                user.put("phoneNumber",phoneNumber.getText().toString());
-                user.put("email",email.getText().toString());
-                user.put("username",username.getText().toString());
-                user.put("password", password.getText().toString());
+                DriverBean driverBean = new DriverBean(fullName.getText().toString(), phoneNumber.getText().toString(), email
+                .getText().toString(),username.getText().toString(),password.getText().toString());
 
                 myFirebaseRef.child(username.getText().toString());
-                myFirebaseRef.setValue(user, new CompletionListener() {
+                myFirebaseRef.setValue(driverBean, new CompletionListener() {
 
                     @Override
                     public void onComplete(FirebaseError firebaseError, Firebase firebase) {
@@ -85,30 +86,9 @@ public class SignUpActivity extends AppCompatActivity {
                             alertDialog.setPositiveButton("Continue", new DialogInterface.OnClickListener() {
                                 @Override
                                 public void onClick(DialogInterface dialog, int which) {
-                                    final GPSTracker gps = new GPSTracker(SignUpActivity.this);
-                                    if(!gps.canGetLocation){
-                                        AlertDialog.Builder alertDialog=new AlertDialog.Builder(SignUpActivity.this);
-                                        alertDialog.setTitle("Location Services not Enabled");
-                                        alertDialog.setMessage("GPS is not enabled. Do you want to go to Settings and Enable it");
-                                        alertDialog.setPositiveButton("Settings", new DialogInterface.OnClickListener() {
-                                            @Override
-                                            public void onClick(DialogInterface dialog, int which) {
-                                                Intent intent = new Intent(Settings.ACTION_LOCATION_SOURCE_SETTINGS);
-                                                startActivity(intent);
-                                            }
-                                        });
-
-                                        alertDialog.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
-                                            @Override
-                                            public void onClick(DialogInterface dialog, int which) {
-                                                dialog.cancel();
-                                            }
-                                        });
-                                        alertDialog.show();
-                                    }
                                     startService(new Intent(SignUpActivity.this, LocationService.class));
-                                    //Intent intent = new Intent(SignUpActivity.this, TripList.class);
-                                    //startActivity(intent);
+                                    Intent intent = new Intent(SignUpActivity.this, TripListActivity.class);
+                                    startActivity(intent);
                                 }
                             });
                         } else {

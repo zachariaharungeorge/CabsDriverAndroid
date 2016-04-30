@@ -1,18 +1,18 @@
-package rdxcabs.com.cabsdriverandroid;
+package com.rdxcabs.Services;
 
 import android.app.Service;
-import android.content.Context;
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.os.IBinder;
-import android.widget.Toast;
 
 import com.firebase.client.Firebase;
 import com.google.android.gms.maps.model.LatLng;
+import com.rdxcabs.Utilities.GPSTracker;
 
-import java.io.FileReader;
+import java.util.logging.Handler;
 
 public class LocationService extends Service {
+
+    Handler mHandler;
 
     public LocationService() {
 
@@ -25,6 +25,9 @@ public class LocationService extends Service {
         //SharedPreferences sp=getSharedPreferences("username", Context.MODE_PRIVATE);
         //final String username = sp.getString("username","");
 
+
+
+
         final Runnable r = new Runnable() {
             @Override
             public void run() {
@@ -34,6 +37,11 @@ public class LocationService extends Service {
                     if(gps.canGetLocation) {
                         LatLng startPos = new LatLng(gps.getLatitude(), gps.getLongitude());
                         firebase.child("username").setValue(startPos);
+                    }
+                    try {
+                        Thread.sleep(1000);
+                    } catch (InterruptedException e) {
+                        e.printStackTrace();
                     }
                 }
 

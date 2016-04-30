@@ -1,4 +1,4 @@
-package rdxcabs.com.cabsdriverandroid;
+package com.rdxcabs.Adapters;
 
 import android.app.Activity;
 import android.content.Context;
@@ -9,6 +9,9 @@ import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+
+import com.rdxcabs.Beans.TripsBean;
+import com.rdxcabs.R;
 
 import java.util.List;
 

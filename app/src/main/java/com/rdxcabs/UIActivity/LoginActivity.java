@@ -1,4 +1,4 @@
-package rdxcabs.com.cabsdriverandroid;
+package com.rdxcabs.UIActivity;
 
 import android.app.AlertDialog;
 import android.app.ProgressDialog;
@@ -8,6 +8,7 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -18,6 +19,9 @@ import com.firebase.client.DataSnapshot;
 import com.firebase.client.Firebase;
 import com.firebase.client.FirebaseError;
 import com.firebase.client.ValueEventListener;
+import com.rdxcabs.Beans.DriverBean;
+import com.rdxcabs.Constants.Constants;
+import com.rdxcabs.R;
 
 import static com.firebase.client.Firebase.setAndroidContext;
 
@@ -43,15 +47,16 @@ public class LoginActivity extends AppCompatActivity {
             public void onClick(View v) {
 
                 final ProgressDialog progressDialog = ProgressDialog.show(LoginActivity.this, "Loading", "Logging in", false, false);
-
-                Firebase firebaseRef = new Firebase("https://resplendent-fire-1005.firebaseio.com/Drivers").child(username.getText().toString());
+                Firebase firebaseRef = new Firebase(Constants.FIREBASE_URL + Constants.URL_SEP + Constants.DRIVER).child(username.getText().toString());
                 firebaseRef.addListenerForSingleValueEvent(new ValueEventListener() {
+
                     @Override
                     public void onDataChange(DataSnapshot dataSnapshot) {
                         AlertDialog.Builder alertDialog = new AlertDialog.Builder(LoginActivity.this);
                         alertDialog.setTitle("Login");
+
                         if (dataSnapshot.exists()) {
-                            final Users u = dataSnapshot.getValue(Users.class);
+                            final DriverBean u = dataSnapshot.getValue(DriverBean.class);
                             if (u.getUsername().equals(username.getText().toString()) && u.getPassword().equals(password.getText().toString())) {
                                 SharedPreferences sharedPreferences = getSharedPreferences("username", Context.MODE_PRIVATE);
                                 SharedPreferences.Editor editor = sharedPreferences.edit();
@@ -61,7 +66,7 @@ public class LoginActivity extends AppCompatActivity {
                                 alertDialog.setPositiveButton("OK", new DialogInterface.OnClickListener() {
                                     @Override
                                     public void onClick(DialogInterface dialog, int which) {
-                                        Intent intent = new Intent(LoginActivity.this, TripList.class);
+                                        Intent intent = new Intent(LoginActivity.this, TripListActivity.class);
                                         startActivity(intent);
                                     }
                                 });
@@ -85,6 +90,7 @@ public class LoginActivity extends AppCompatActivity {
                                 }
                             });
                         }
+
                         progressDialog.dismiss();
                         alertDialog.show();
                     }

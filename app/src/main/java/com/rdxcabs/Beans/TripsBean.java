@@ -1,4 +1,4 @@
-package rdxcabs.com.cabsdriverandroid;
+package com.rdxcabs.Beans;
 
 /**
  * Created by arung on 19/4/16.
