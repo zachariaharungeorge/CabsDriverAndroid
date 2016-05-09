@@ -3,8 +3,7 @@
     android:layout_height="match_parent" android:paddingLeft="0dp"
     android:paddingRight="0dp"
     android:paddingTop="0dp"
-    android:paddingBottom="0dp"
-    tools:context="rdxcabs.com.rdxcabs.TripLayout">
+    android:paddingBottom="0dp">
 
     <LinearLayout
         android:orientation="vertical"

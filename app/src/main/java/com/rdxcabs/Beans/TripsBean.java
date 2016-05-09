@@ -5,6 +5,8 @@ package com.rdxcabs.Beans;
  */
 public class TripsBean {
 
+    private String tripId;
+
     private String username;
 
     private String sourceLoc;
@@ -19,10 +21,20 @@ public class TripsBean {
 
     private String fare;
 
+    private String state;
+
     private String comments;
 
     public TripsBean(){
 
+    }
+
+    public String getTripId() {
+        return tripId;
+    }
+
+    public void setTripId(String tripId) {
+        this.tripId = tripId;
     }
 
     public String getUsername() {
@@ -88,4 +100,8 @@ public class TripsBean {
     public void setComments(String comments) {
         this.comments = comments;
     }
+
+    public String getState() { return state; }
+
+    public void setState(String state) { this.state = state; }
 }

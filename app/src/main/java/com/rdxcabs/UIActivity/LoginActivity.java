@@ -58,9 +58,9 @@ public class LoginActivity extends AppCompatActivity {
                         if (dataSnapshot.exists()) {
                             final DriverBean u = dataSnapshot.getValue(DriverBean.class);
                             if (u.getUsername().equals(username.getText().toString()) && u.getPassword().equals(password.getText().toString())) {
-                                SharedPreferences sharedPreferences = getSharedPreferences("username", Context.MODE_PRIVATE);
+                                SharedPreferences sharedPreferences = getSharedPreferences(Constants.MYCABS_DRIVER, Context.MODE_PRIVATE);
                                 SharedPreferences.Editor editor = sharedPreferences.edit();
-                                editor.putString("username", u.getUsername());
+                                editor.putString(Constants.USERNAME, u.getUsername());
                                 editor.commit();
                                 alertDialog.setMessage("Login Successful");
                                 alertDialog.setPositiveButton("OK", new DialogInterface.OnClickListener() {
