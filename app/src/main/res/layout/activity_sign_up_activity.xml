@@ -40,12 +40,50 @@
         android:inputType="textEmailAddress"
         android:ems="10"
         android:id="@+id/email"
+        android:hint="Email Address"
         android:layout_below="@+id/phone"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
+        android:layout_alignRight="@+id/regNo"
+        android:layout_alignEnd="@+id/regNo" />
+
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:inputType="textPersonName"
+        android:ems="10"
+        android:id="@+id/regNo"
+        android:hint="Vehicle Reg No"
+        android:layout_below="@+id/email"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
         android:layout_alignRight="@+id/phone"
-        android:layout_alignEnd="@+id/phone"
-        android:hint="Email Address" />
+        android:layout_alignEnd="@+id/phone" />
+
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:inputType="textPersonName"
+        android:ems="10"
+        android:id="@+id/license"
+        android:hint="License"
+        android:layout_below="@+id/regNo"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_alignRight="@+id/regNo"
+        android:layout_alignEnd="@+id/regNo" />
+
+    <Spinner
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/cabType"
+        android:paddingTop="10dp"
+        android:paddingBottom="10dp"
+        android:spinnerMode="dropdown"
+        android:layout_weight="1"
+        android:layout_below="@+id/license"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
 
     <EditText
         android:layout_width="wrap_content"
@@ -53,12 +91,12 @@
         android:inputType="textPersonName"
         android:ems="10"
         android:id="@+id/username"
-        android:layout_below="@+id/email"
+        android:hint="Username"
+        android:layout_below="@+id/cabType"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
-        android:layout_alignRight="@+id/email"
-        android:layout_alignEnd="@+id/email"
-        android:hint="Username" />
+        android:layout_alignRight="@+id/cabType"
+        android:layout_alignEnd="@+id/cabType" />
 
     <EditText
         android:layout_width="wrap_content"
@@ -66,12 +104,12 @@
         android:inputType="textPassword"
         android:ems="10"
         android:id="@+id/password"
+        android:hint="Password"
         android:layout_below="@+id/username"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
         android:layout_alignRight="@+id/username"
-        android:layout_alignEnd="@+id/username"
-        android:hint="Password" />
+        android:layout_alignEnd="@+id/username" />
 
     <Button
         android:layout_width="wrap_content"
@@ -79,9 +117,9 @@
         android:text="Sign Up"
         android:id="@+id/signUp"
         android:layout_below="@+id/password"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true"
         android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
-        android:layout_alignRight="@+id/password"
-        android:layout_alignEnd="@+id/password" />
+        android:layout_alignParentStart="true" />
 
 </RelativeLayout>

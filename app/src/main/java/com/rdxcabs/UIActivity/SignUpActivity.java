@@ -13,7 +13,10 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.Spinner;
 import android.widget.TextView;
 
 import com.firebase.client.Firebase;
@@ -38,6 +41,24 @@ public class SignUpActivity extends AppCompatActivity {
         setContentView(R.layout.activity_sign_up_activity);
 
         final Button signUp = (Button) findViewById(R.id.signUp);
+        final DriverBean driverBean = new DriverBean();
+
+        final Spinner spinner = (Spinner) findViewById(R.id.cabType);
+        final ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(SignUpActivity.this, R.array.cabTypes, R.layout.dropdownlayout);
+        spinner.setAdapter(adapter);
+        spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener(){
+
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                driverBean.setCabType(parent.getItemAtPosition(position).toString());
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+
+            }
+        });
+
 
         signUp.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -46,10 +67,25 @@ public class SignUpActivity extends AppCompatActivity {
                 final ProgressDialog progressDialog=ProgressDialog.show(SignUpActivity.this, "Loading", "Saving Data", false,false);
 
                 TextView fullName = (TextView) findViewById(R.id.fullName);
+                driverBean.setFullName(fullName.getText().toString());
+
                 TextView phoneNumber = (TextView) findViewById(R.id.phone);
+                driverBean.setPhone(phoneNumber.getText().toString());
+
                 TextView email = (TextView) findViewById(R.id.email);
+                driverBean.setEmail(email.getText().toString());
+
                 TextView username = (TextView) findViewById(R.id.username);
+                driverBean.setUsername(username.getText().toString());
+
                 TextView password = (TextView) findViewById(R.id.password);
+                driverBean.setPassword(password.getText().toString());
+
+                TextView license = (TextView) findViewById(R.id.license);
+                driverBean.setLicenseNo(license.getText().toString());
+
+                TextView regNo = (TextView) findViewById(R.id.regNo);
+                driverBean.setRegistrationNo(regNo.getText().toString());
 
                 if(fullName.getText() == null || phoneNumber.getText() == null || email.getText() == null || username.getText()==null || password.getText() == null){
                     final AlertDialog.Builder alertDialog = new AlertDialog.Builder(SignUpActivity.this);
@@ -65,9 +101,6 @@ public class SignUpActivity extends AppCompatActivity {
                 }
 
                 Firebase myFirebaseRef = new Firebase(Constants.FIREBASE_URL + Constants.URL_SEP + Constants.DRIVER + Constants.URL_SEP + username.getText().toString());
-
-                DriverBean driverBean = new DriverBean(fullName.getText().toString(), phoneNumber.getText().toString(), email
-                .getText().toString(),username.getText().toString(),password.getText().toString());
 
                 myFirebaseRef.child(username.getText().toString());
                 myFirebaseRef.setValue(driverBean, new CompletionListener() {

@@ -10,17 +10,23 @@ public class DriverBean {
     private String email;
     private String username;
     private String password;
+    private String cabType;
+    private String registrationNo;
+    private String licenseNo;
 
     public DriverBean(){
 
     }
 
-    public DriverBean(String fullName, String phone, String email, String username, String password) {
+    public DriverBean(String fullName, String phone, String email, String username, String password, String cabType, String registrationNo, String licenseNo) {
         this.fullName = fullName;
         this.phone = phone;
         this.email = email;
         this.username = username;
         this.password = password;
+        this.cabType = cabType;
+        this.registrationNo = registrationNo;
+        this.licenseNo = licenseNo;
     }
 
     public String getFullName() {
@@ -61,5 +67,29 @@ public class DriverBean {
 
     public void setPassword(String password) {
         this.password = password;
+    }
+
+    public String getCabType() {
+        return cabType;
+    }
+
+    public void setCabType(String cabType) {
+        this.cabType = cabType;
+    }
+
+    public String getRegistrationNo() {
+        return registrationNo;
+    }
+
+    public void setRegistrationNo(String registrationNo) {
+        this.registrationNo = registrationNo;
+    }
+
+    public String getLicenseNo() {
+        return licenseNo;
+    }
+
+    public void setLicenseNo(String licenseNo) {
+        this.licenseNo = licenseNo;
     }
 }

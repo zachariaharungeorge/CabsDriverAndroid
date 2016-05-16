@@ -1,9 +1,15 @@
 <resources>
     <string name="app_name">CabsDriverAndroid</string>
-
-    <string name="hello_world">Hello world!</string>
     <string name="action_settings">Settings</string>
     <string name="title_activity_login_activity">Login</string>
     <string name="title_activity_sign_up_activity">Sign Up</string>
     <string name="title_activity_my_trip_list">MyTripList</string>
+    <string-array name="cabTypes">
+        <item>Mini</item>
+        <item>Sedan</item>
+        <item>Sumo</item>
+        <item>XL</item>
+        <item>XT</item>
+        <item>Mini Bus</item>
+    </string-array>
 </resources>
