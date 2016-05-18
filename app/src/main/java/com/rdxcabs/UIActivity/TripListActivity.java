@@ -6,7 +6,6 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.preference.Preference;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
@@ -24,7 +23,6 @@ import com.rdxcabs.Adapters.TripLayoutAdapter;
 import com.rdxcabs.Beans.TripsBean;
 import com.rdxcabs.Constants.Constants;
 import com.rdxcabs.R;
-import com.rdxcabs.Services.LocationService;
 
 import java.util.ArrayList;
 

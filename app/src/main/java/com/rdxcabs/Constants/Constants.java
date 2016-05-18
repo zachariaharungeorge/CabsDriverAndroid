@@ -13,4 +13,5 @@ public class Constants {
     public static String MYCABS_DRIVER = "MYCABS_DRIVER";
     public static String STATUS_REQUESTED = "Requested";
     public static String STATUS_ACCEPTED = "Accepted";
+    public final static String tabtitles[] = new String[] { "Profile", "Trip List", "Accepted Trips" };
 }
