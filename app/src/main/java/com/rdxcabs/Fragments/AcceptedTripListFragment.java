@@ -1,12 +1,12 @@
 package com.rdxcabs.Fragments;
 
+import android.support.v4.app.Fragment;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.support.v4.app.Fragment;
 import android.support.v7.app.AlertDialog;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -29,10 +29,9 @@ import java.util.ArrayList;
 import static com.firebase.client.Firebase.setAndroidContext;
 
 /**
- * Created by arung on 17/5/16.
+ * Created by arung on 18/5/16.
  */
-
-public class TripListFragment extends Fragment {
+public class AcceptedTripListFragment extends Fragment {
 
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -46,15 +45,14 @@ public class TripListFragment extends Fragment {
             progressDialog.show();
             Firebase myFirebaseRef = new Firebase(Constants.FIREBASE_URL + Constants.URL_SEP + Constants.TRIPS);
 
-            SharedPreferences sp=this.getActivity().getSharedPreferences(Constants.MYCABS_DRIVER,Context.MODE_PRIVATE);
+            SharedPreferences sp=this.getActivity().getSharedPreferences(Constants.MYCABS_DRIVER, Context.MODE_PRIVATE);
             final String username = sp.getString(Constants.USERNAME,"");
-            final String cabType = sp.getString(Constants.CAB_TYPE,"");
 
             myFirebaseRef.addChildEventListener(new ChildEventListener() {
                                                     @Override
                                                     public void onChildAdded(DataSnapshot dataSnapshot, String s) {
                                                         TripsBean tripsBean = dataSnapshot.getValue(TripsBean.class);
-                                                        if(Constants.STATUS_REQUESTED.equalsIgnoreCase(tripsBean.getState()) && cabType.equalsIgnoreCase(tripsBean.getCabType())) {
+                                                        if(username.equals(tripsBean.getDriverUname()) && Constants.STATUS_ACCEPTED.equalsIgnoreCase(tripsBean.getState())) {
                                                             lst.add(tripsBean);
                                                         }
 
@@ -68,12 +66,11 @@ public class TripListFragment extends Fragment {
                                                                     final TripsBean selectedtrip = lst.get(position);
                                                                     AlertDialog.Builder alert = new AlertDialog.Builder(getContext());
                                                                     alert.setTitle("Accept Ride");
-                                                                    alert.setMessage("From : " + selectedtrip.getSourceLoc() + "\n" + "To : " + selectedtrip.getDestLoc());
+                                                                    alert.setMessage("From : " + selectedtrip.getSourceLoc() + "\n" + "To : " + selectedtrip.getDestLoc() + "\n" + "Fare : " + selectedtrip.getFare());
                                                                     alert.setPositiveButton("Accept", new DialogInterface.OnClickListener() {
                                                                         @Override
                                                                         public void onClick(DialogInterface dialog, int which) {
                                                                             selectedtrip.setState(Constants.STATUS_ACCEPTED);
-                                                                            selectedtrip.setDriverUname(username);
                                                                             final ProgressDialog progressDialog=ProgressDialog.show(getContext(), "Loading", "Accepting Ride", false,false);
                                                                             progressDialog.show();
 
@@ -152,5 +149,4 @@ public class TripListFragment extends Fragment {
         }
         return view;
     }
-
 }

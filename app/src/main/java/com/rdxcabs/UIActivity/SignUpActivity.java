@@ -111,16 +111,17 @@ public class SignUpActivity extends AppCompatActivity {
                         alertDialog.setTitle("Sign Up");
                         alertDialog.setCancelable(false);
                         if (firebaseError == null) {
-                            SharedPreferences sharedPreferences = getSharedPreferences("username", Context.MODE_PRIVATE);
-                            //SharedPreferences.Editor editor = sharedPreferences.edit();
-                            //editor.putString("username", user.get("username"));
-                            //editor.commit();
+                            SharedPreferences sharedPreferences = getSharedPreferences(Constants.MYCABS_DRIVER, Context.MODE_PRIVATE);
+                            SharedPreferences.Editor editor = sharedPreferences.edit();
+                            editor.putString(Constants.USERNAME, driverBean.getUsername());
+                            editor.putString(Constants.CAB_TYPE, driverBean.getCabType());
+                            editor.commit();
                             alertDialog.setMessage("Sign Up Successful");
                             alertDialog.setPositiveButton("Continue", new DialogInterface.OnClickListener() {
                                 @Override
                                 public void onClick(DialogInterface dialog, int which) {
                                     startService(new Intent(SignUpActivity.this, LocationService.class));
-                                    Intent intent = new Intent(SignUpActivity.this, TripListActivity.class);
+                                    Intent intent = new Intent(SignUpActivity.this, HomeActivity.class);
                                     startActivity(intent);
                                 }
                             });

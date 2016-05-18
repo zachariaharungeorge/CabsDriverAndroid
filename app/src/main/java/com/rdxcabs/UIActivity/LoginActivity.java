@@ -61,6 +61,7 @@ public class LoginActivity extends AppCompatActivity {
                                 SharedPreferences sharedPreferences = getSharedPreferences(Constants.MYCABS_DRIVER, Context.MODE_PRIVATE);
                                 SharedPreferences.Editor editor = sharedPreferences.edit();
                                 editor.putString(Constants.USERNAME, u.getUsername());
+                                editor.putString(Constants.CAB_TYPE, u.getCabType());
                                 editor.commit();
                                 alertDialog.setMessage("Login Successful");
                                 alertDialog.setPositiveButton("OK", new DialogInterface.OnClickListener() {

@@ -23,6 +23,8 @@ public class TripsBean {
 
     private String state;
 
+    private String driverUname;
+
     private String comments;
 
     public TripsBean(){
@@ -93,6 +95,22 @@ public class TripsBean {
         this.fare = fare;
     }
 
+    public String getState() {
+        return state;
+    }
+
+    public void setState(String state) {
+        this.state = state;
+    }
+
+    public String getDriverUname() {
+        return driverUname;
+    }
+
+    public void setDriverUname(String driverUname) {
+        this.driverUname = driverUname;
+    }
+
     public String getComments() {
         return comments;
     }
@@ -100,8 +118,4 @@ public class TripsBean {
     public void setComments(String comments) {
         this.comments = comments;
     }
-
-    public String getState() { return state; }
-
-    public void setState(String state) { this.state = state; }
 }

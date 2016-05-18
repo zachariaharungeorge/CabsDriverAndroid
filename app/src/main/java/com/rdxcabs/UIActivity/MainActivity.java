@@ -50,7 +50,7 @@ public class MainActivity extends AppCompatActivity {
 
 
         if(username!=""){
-            Intent intent = new Intent(this,TripListActivity.class);
+            Intent intent = new Intent(this,HomeActivity.class);
             startActivity(intent);
         }
 

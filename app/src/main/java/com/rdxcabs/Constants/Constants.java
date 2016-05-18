@@ -10,6 +10,7 @@ public class Constants {
     public static String DRIVER = "driver";
     public static String TRIPS = "trips";
     public static String USERNAME = "USERNAME";
+    public static String CAB_TYPE = "CABTYPE";
     public static String MYCABS_DRIVER = "MYCABS_DRIVER";
     public static String STATUS_REQUESTED = "Requested";
     public static String STATUS_ACCEPTED = "Accepted";
